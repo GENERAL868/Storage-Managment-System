@@ -29,7 +29,7 @@ if (!isset($_SESSION['UID'])) {
         $pageTitle = 'Search Result';
         include('header.php');
 
-        // Add topLinks bar
+        //topLinks bar
         echo '<div id="topLinks">
     <ul>
         <li><a href="formToSearch.php">Home</a></li>';

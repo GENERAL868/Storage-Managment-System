@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS usrdt (
 )";
 mysqli_query($conn, $table_query) or die("Table creation error: " . mysqli_error($conn));
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usrid = trim($_POST['usrid']);
     $usrpswd = trim($_POST['usrpswd']);
@@ -45,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Hash the password securely
         $hashed_password = password_hash($usrpswd, PASSWORD_DEFAULT);
 
-        // Use prepared statements to insert safely
+        
         $stmt = $conn->prepare("INSERT INTO usrdt (usrid, usrpswd, usrname, usremail, usrtype, usrlastlogindate) VALUES (?, ?, ?, ?, ?, NOW())");
         $stmt->bind_param("sssss", $usrid, $hashed_password, $usrname, $usremail, $usrtype);
 
@@ -79,11 +80,12 @@ include('header.php');
     </ul>
 <?php endif; ?>
 
+<!-- Registration Form -->
 <form method="POST" action="">
     <table>
         <tr>
             <td><label for="usrid">User ID:</label></td>
-            <td><input type="text" name="usrid" id="usrid" value="<?= htmlspecialchars($_POST['usrid'] ?? '') ?>" required></td>
+            <td><input type="text" name="usrid" id="usrid" value="<?= ($_POST['usrid'] ?? '') ?>" required></td>
         </tr>
         <tr>
             <td><label for="usrpswd">Password:</label></td>
@@ -91,11 +93,11 @@ include('header.php');
         </tr>
         <tr>
             <td><label for="usrname">Full Name:</label></td>
-            <td><input type="text" name="usrname" id="usrname" value="<?= htmlspecialchars($_POST['usrname'] ?? '') ?>" required></td>
+            <td><input type="text" name="usrname" id="usrname" value="<?= ($_POST['usrname'] ?? '') ?>" required></td>
         </tr>
         <tr>
             <td><label for="usremail">Email:</label></td>
-            <td><input type="email" name="usremail" id="usremail" value="<?= htmlspecialchars($_POST['usremail'] ?? '') ?>" required></td>
+            <td><input type="email" name="usremail" id="usremail" value="<?= ($_POST['usremail'] ?? '') ?>" required></td>
         </tr>
         <tr>
             <td><label for="usrtype">User Type:</label></td>

@@ -8,7 +8,6 @@ if (!isset($_SESSION['UID'])) {
     include('header.php');
     include('dbconnect.php');
 
-     // Add topLinks navigation
      echo '
      <div id="topLinks">
          <ul>
@@ -17,7 +16,7 @@ if (!isset($_SESSION['UID'])) {
              <li><a href="formItems.php">Add or Delete or Update items For Suppliers</a></li>
          </ul>
      </div>';
-
+    
     $q = "SELECT * FROM items WHERE iCode = '{$_GET['x']}'";
     $r = mysqli_query($conn, $q) or die("Error in query: <mark>$q</mark><br>\n" . mysqli_error($conn));
     $item = mysqli_fetch_assoc($r);

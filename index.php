@@ -12,7 +12,7 @@ include('header.php');
     </ul>
 </div>
 
-<!-- Success message after password reset -->
+<!--message after password reset -->
 <?php if (isset($_GET['reset']) && $_GET['reset'] === 'success'): ?>
     <p style="color: green; text-align: center;">Password updated successfully. You can now log in.</p>
 <?php endif; ?>

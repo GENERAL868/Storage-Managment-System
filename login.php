@@ -28,7 +28,7 @@ if (mysqli_num_rows($r) === 1) {
         exit;
     }
 } else {
-    header('Location: error.php?ec=0'); // Invalid credentials
+    header('Location: error.php?ec=0'); //invalid details
     exit;
 }
 ?>

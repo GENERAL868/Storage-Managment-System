@@ -17,11 +17,12 @@
 </header>
     <section id='userBar'>
         <?php
-            // session_start();
+    
+            
             if (isset($_SESSION['UID'])) {
                 $UserTypes = ['A'=>'Admin', 'N'=>'Normal'];
                 echo "<div>{$_SESSION['NAME']} <i>({$UserTypes[$_SESSION['TYPE']]})</i> | <a href='logout.php'>Logout</a></div>"; 
-                //if (isset($_COOKIE['uid'])) { echo "[".$_COOKIE['uid'] ."]" .$_COOKIE['name'];} else echo "***";
+               
             } else {
                 $logInForm = "
                 <div>
@@ -31,14 +32,10 @@
                 <input type='submit' name='submit' value='Login'></form>
                 </div>
                 ";
-                // echo $logInForm;
+                
             }
         ?>
-    </section>  <!-- end of user bar section -->
-    <section id='topLinks'>
-        <ul>
-            <!--  <li><a href='../'>Home</a></li> -->
-        </ul>
-    </section> <!-- end of topLinks section -->
+    </section> 
+ 
 <section class=content>
 <?php $mo="<mark>"; $mc="</mark>"; ?>

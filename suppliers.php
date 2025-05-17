@@ -74,7 +74,6 @@ if (!isset($_SESSION['UID'])) {
     $result = $conn->query("SELECT * FROM suppliers ORDER BY supplierId ASC");
     ?>
 
-    <!DOCTYPE html>
     <html>
     <head>
         <title>Suppliers Management</title>

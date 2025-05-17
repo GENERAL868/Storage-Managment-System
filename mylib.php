@@ -1,4 +1,5 @@
 <?php
+// function to display errors in a form
 function DisplayErrors() {
     global $errors;
     echo "<form>\n";

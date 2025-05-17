@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "<p style='color:red;'>Error updating password: " . mysqli_error($conn) . "</p>";
             }
         } else {
-            // Ask user to input new password
+            // form to enter new password
             echo <<<FORM
                 <h2>Reset Password</h2>
                 <form method="POST" action="">
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Initial form (if no POST yet or missing data)
+// Initial form 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['email']) || (isset($_POST['newpass']) && empty($_POST['newpass']))) {
     echo <<<FORM
         <h2>Forgot Password</h2>
