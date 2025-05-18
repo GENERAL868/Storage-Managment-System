@@ -18,6 +18,7 @@ include('dbconnect.php');
         <?php if ($_SESSION['TYPE'] === 'A'): ?>
             <li><a href="suppliers.php">Add or Delete suppliers</a></li>
             <li><a href="formItems.php">Add or Delete or Update items For Suppliers</a></li>
+            <li><a href="user.php">UPDATE USER</a></li>
         <?php endif; ?>
     </ul>
 </div>

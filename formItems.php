@@ -13,6 +13,7 @@ if (!isset($_SESSION['UID'])) {
         <ul>
             <li><a href="formToSearch.php">Home</a></li>
             <li><a href="suppliers.php">Add or Delete suppliers</a></li>
+            <li><a href="user.php">UPDATE USER</a></li>
         </ul>
     </div>';
 

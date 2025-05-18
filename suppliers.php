@@ -8,17 +8,18 @@ if (!isset($_SESSION['UID'])) {
     include('header.php');
     include('dbconnect.php');
 
-    // Add topLinks navigation
+   
     echo '
     <div id="topLinks">
         <ul>
             <li><a href="formToSearch.php">Home</a></li>
             <li><a href="formItems.php">Add or Delete or Update items</a></li>
+            <li><a href="user.php">UPDATE USER</a></li>
 
         </ul>
     </div>';
 
-    // Create suppliers table if it doesn't exist
+
     $create_table_query = "
     CREATE TABLE IF NOT EXISTS suppliers (
         supplierId INT PRIMARY KEY,
@@ -39,15 +40,23 @@ if (!isset($_SESSION['UID'])) {
         $phone   = $_POST['supplierPhone'];
         $email   = $_POST['supplierEmail'];
 
-        // Ensure no empty supplierId or supplierName
+        
         if (!empty($id) && !empty($name)) {
-            $stmt = $conn->prepare("INSERT INTO suppliers (supplierId, supplierName, supplierAddress, supplierPhone, supplierEmail) VALUES (?, ?, ?, ?, ?)");
-            $stmt->bind_param("issss", $id, $name, $address, $phone, $email);
+            // Check if supplierId already exists
+            $check_query = "SELECT * FROM suppliers WHERE supplierId = $id";
+            $result = $conn->query($check_query);
 
-            if ($stmt->execute()) {
-                echo "<p style='color:green;'>Supplier added successfully!</p>";
+            if ($result->num_rows > 0) {
+                echo "<p style='color:red;'>Supplier ID already exists. Please choose a different Supplier ID.</p>";
             } else {
-                echo "<p style='color:red;'>Error: " . $stmt->error . "</p>";
+                // Insert the new supplier if ID does not exist
+                $insert_query = "INSERT INTO suppliers (supplierId, supplierName, supplierAddress, supplierPhone, supplierEmail) 
+                                 VALUES ('$id', '$name', '$address', '$phone', '$email')";
+                if ($conn->query($insert_query)) {
+                    echo "<p style='color:green;'>Supplier added successfully!</p>";
+                } else {
+                    echo "<p style='color:red;'>Error: " . $conn->error . "</p>";
+                }
             }
         } else {
             echo "<p style='color:red;'>Supplier ID and Name are required!</p>";
@@ -58,12 +67,11 @@ if (!isset($_SESSION['UID'])) {
     if (isset($_POST['delete_supplier'])) {
         $id = $_POST['deleteId'];
         if (!empty($id)) {
-            $stmt = $conn->prepare("DELETE FROM suppliers WHERE supplierId = ?");
-            $stmt->bind_param("i", $id);
-            if ($stmt->execute()) {
+            $delete_query = "DELETE FROM suppliers WHERE supplierId = $id";
+            if ($conn->query($delete_query)) {
                 echo "<p style='color:red;'>Supplier deleted successfully!</p>";
             } else {
-                echo "<p style='color:red;'>Error: " . $stmt->error . "</p>";
+                echo "<p style='color:red;'>Error: " . $conn->error . "</p>";
             }
         } else {
             echo "<p style='color:red;'>Supplier ID is required!</p>";
@@ -113,14 +121,13 @@ if (!isset($_SESSION['UID'])) {
 
         <!-- Delete Supplier Form -->
 <h2>Delete Supplier</h2>
-<form method="POST" onsubmit="return confirmDelete();">
+<form method="POST" onsubmit="return confirmDelete()">
     <label>Enter Supplier ID to Delete:</label>
     <input type="number" name="deleteId" required>
     <div style="text-align: center;">
         <div><br></br></div>
-  <button type="submit" name="delete_supplier">Delete Supplier</button>
-</div>
-
+        <button type="submit" name="delete_supplier">Delete Supplier</button>
+    </div>
 </form>
 
 <script>
@@ -128,6 +135,7 @@ function confirmDelete() {
     return confirm("Are you sure you want to delete this supplier?");
 }
 </script>
+
 
         <!-- Display Suppliers Table -->
         <h2>Current Suppliers</h2>

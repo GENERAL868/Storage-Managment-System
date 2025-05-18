@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 16, 2025 at 08:14 PM
--- Server version: 8.0.30
--- PHP Version: 8.1.10
+-- Generation Time: May 18, 2025 at 07:17 PM
+-- Server version: 8.4.3
+-- PHP Version: 8.3.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -252,7 +252,8 @@ INSERT INTO `items` (`iCode`, `iCategoryCode`, `iDesc`, `iSpec`, `iQtyOnHand`, `
 ('04-00058', 4, 'Locker Cabinet 12-Pack', 'Steel, Key Lock', 4, 'Workshop-M', 280, 379.99, 1004, 'A', NULL, NULL, NULL, NULL, NULL),
 ('05-00058', 5, 'Calculator Scientific', '240 Functions, Solar', 15, 'L02-02', 15, 24.95, 1005, 'A', NULL, NULL, NULL, NULL, NULL),
 ('06-00009', 6, 'Mop & Bucket Set', 'Spin Mop, 2 Refills', 8, 'Store2-R', 18, 26.95, 1018, 'A', NULL, NULL, NULL, NULL, NULL),
-('66', 12, 'test', 'cat', 1, 'nizwa', 5, 6, 1021, 'A', NULL, NULL, NULL, NULL, NULL);
+('66', 12, 'test', 'cat', 1, 'nizwa', 5, 6, 1021, 'A', NULL, NULL, NULL, NULL, NULL),
+('1', 12, 'a', 'a', 1, 'n', 1, 2, 1038, 'A', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -303,7 +304,6 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`supplierId`, `supplierName`, `supplierAddress`, `supplierPhone`, `supplierEmail`) VALUES
-(1021, 'Al Marafiq Trading', 'Muscat, Al Khuwair', '71234567', 'info@marafiq.com.om'),
 (1022, 'Nizwa Hardware Center', 'Nizwa, Birkat Al Mouz', '92548673', 'sales@nizwahardware.om'),
 (1023, 'Muscat Office Solutions', 'Muscat, Ruwi High Street', '24459876', 'support@muscatoffices.com'),
 (1024, 'Dhofar Food Supplies', 'Salalah, Al Hafa Street', '23217654', 'orders@dhofarfoods.om'),
@@ -332,22 +332,19 @@ INSERT INTO `suppliers` (`supplierId`, `supplierName`, `supplierAddress`, `suppl
 
 CREATE TABLE `usrdt` (
   `usrid` varchar(50) NOT NULL,
-  `usrpswd` varchar(100) NOT NULL,
+  `usrpswd` varchar(255) NOT NULL,
   `usrname` varchar(100) NOT NULL,
   `usremail` varchar(100) NOT NULL,
-  `usrtype` varchar(50) DEFAULT NULL,
-  `usrlastlogindate` datetime DEFAULT NULL,
-  `reset_token` varchar(64) DEFAULT NULL,
-  `reset_token_expiry` datetime DEFAULT NULL
+  `usrtype` enum('A','N') NOT NULL,
+  `usrlastlogindate` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `usrdt`
 --
 
-INSERT INTO `usrdt` (`usrid`, `usrpswd`, `usrname`, `usremail`, `usrtype`, `usrlastlogindate`, `reset_token`, `reset_token_expiry`) VALUES
-('100', '123', 'ahmed', 'dadf@gnmail.com', 'N', '2025-05-12 21:25:09', NULL, NULL),
-('300', '123', 'mohammed al naamani', 'dadf@gnmail.com', 'A', '2025-05-12 21:20:48', NULL, NULL);
+INSERT INTO `usrdt` (`usrid`, `usrpswd`, `usrname`, `usremail`, `usrtype`, `usrlastlogindate`) VALUES
+('92339122', 'M1234', 'Mohammed Alnaamani', 'qwe@utas.edu', 'A', '2025-05-18 20:44:48');
 
 --
 -- Indexes for dumped tables
@@ -399,7 +396,8 @@ ALTER TABLE `suppliers`
 -- Indexes for table `usrdt`
 --
 ALTER TABLE `usrdt`
-  ADD PRIMARY KEY (`usrid`);
+  ADD PRIMARY KEY (`usrid`),
+  ADD UNIQUE KEY `usremail` (`usremail`);
 
 --
 -- AUTO_INCREMENT for dumped tables

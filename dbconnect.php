@@ -1,4 +1,5 @@
 <?php
+//Mohammed Al-Naamani && Alhusain Alshaaili
 $hostname = "localhost";
 $user = "root"; //please replace it with your db user s26j2052
 $pass = ""; // please replace it with your db password 1214

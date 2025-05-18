@@ -5,12 +5,7 @@ include('header.php');
 
 <h1 style="text-align: center;">Inventory Management System</h1>
 
-<div id="topLinks">
-    <ul>
-        <li><a href="forgot_password.php">Forgot Password</a></li>
-        <li><a href="register.php">Register</a></li>
-    </ul>
-</div>
+
 
 <!--message after password reset -->
 <?php if (isset($_GET['reset']) && $_GET['reset'] === 'success'): ?>
