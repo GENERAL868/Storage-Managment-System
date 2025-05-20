@@ -43,7 +43,7 @@ if ($_SESSION['TYPE'] === 'A') {
 echo '
     </ul>
 </div>';
-
+$pageTitle = 'Inventory Management System';
         include('dbconnect.php');
 
         echo "<form style='width: 90%'>\n";

@@ -1,4 +1,5 @@
 <?php
+$pageTitle = 'Inventory Management System';
 include('dbconnect.php');
 include('header.php');
 echo '<div id="topLinks">

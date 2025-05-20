@@ -337,7 +337,7 @@ CREATE TABLE `usrdt` (
   `usremail` varchar(100) NOT NULL,
   `usrtype` enum('A','N') NOT NULL,
   `usrlastlogindate` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `usrdt`

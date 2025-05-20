@@ -4,7 +4,7 @@ if (!isset($_SESSION['UID'])) {
     header('Location: error.php?ec=1'); // User is not logged in
     exit;
 } elseif ($_SESSION['TYPE'] == 'A') {
-    $pageTitle = 'New Purchase';
+    $pageTitle = 'Inventory Management System';
     include('header.php');
     include('dbconnect.php');
 

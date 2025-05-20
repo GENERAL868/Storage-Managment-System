@@ -7,7 +7,7 @@ if (!isset($_SESSION['UID'])) {
     header('Location: error.php?ec=4');
     exit;
 }
-
+$pageTitle = 'Inventory Management System';
 include('dbconnect.php');
 include('header.php');
 
